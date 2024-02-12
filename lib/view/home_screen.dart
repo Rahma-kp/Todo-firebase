@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 height: 80,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Padding(
                       padding: EdgeInsets.all(10),
@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "asdfaaaaa",
+                            "asdfaaaaahhhh",
                             style: GoogleFonts.aBeeZee(
                                 color: Colors.black,
                                 fontSize: 15,
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: Color.fromARGB(255, 1, 1, 1),
+          backgroundColor: const Color.fromARGB(255, 1, 1, 1),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => AddingScreen(),

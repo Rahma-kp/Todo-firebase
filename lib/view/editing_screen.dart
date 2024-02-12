@@ -16,19 +16,19 @@ class EditingScreen extends StatelessWidget {
           centerTitle: true),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          CircleAvatar(
+          const CircleAvatar(
             radius: 70,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () {},
-                child: Icon(Icons.camera),
+                child: const Icon(Icons.camera),
               ),
-              SizedBox(width: 20,),
+              const SizedBox(width: 20,),
                 ElevatedButton(
                 onPressed: () {},
-                child: Icon(Icons.add_a_photo_outlined),
+                child: const Icon(Icons.add_a_photo_outlined),
               )
             ],
           ),
@@ -62,7 +62,7 @@ class EditingScreen extends StatelessWidget {
                   builder: (context) => HomeScreen(),
                 ));
               },
-              child: Text("Edit"))
+              child: const Text("Edit"))
         ]),
       ),
     );
