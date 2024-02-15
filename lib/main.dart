@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/controller/image_provider.dart';
+import 'package:todo/controller/student_provider.dart';
 import 'package:todo/view/home_screen.dart';
 
 void main() async{
@@ -23,7 +24,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [ChangeNotifierProvider(create: (context) => ImageProviders(),)],
+    return MultiProvider(providers: [
+      ChangeNotifierProvider(create: (context) => StudentProvider(),),
+      ChangeNotifierProvider(create: (context) => ImageProviders(),)],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),),
