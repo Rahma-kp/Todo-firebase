@@ -5,16 +5,20 @@ import 'package:todo/model/student_model.dart';
 
 
 class FirebaseService {
-  String collectionRef = 'Student';
+  String collectionref = 'student';
+  //instnce data aces cheyn
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  FirebaseStorage storage = FirebaseStorage.instance;
 
-  late final CollectionReference<StudentModel> studentRef;
+  FirebaseStorage storage = FirebaseStorage.instance;
+  late final CollectionReference<StudentModel> studentref;
+  Reference main = FirebaseStorage.instance.ref();
 
   FirebaseService() {
-    studentRef = firestore.collection(collectionRef).withConverter<StudentModel>(
-          fromFirestore: (snapshot, options) => StudentModel.fromJson(snapshot.data() ?? {}),
-          toFirestore: (value, options) => value.toJson(),
-        );
+    studentref =
+        firestore.collection(collectionref).withConverter<StudentModel>(
+              fromFirestore: (snapshot, options) =>
+                  StudentModel.fromJson(snapshot.data()!),
+              toFirestore: (value, options) => value.toJson(),
+            );
   }
 }

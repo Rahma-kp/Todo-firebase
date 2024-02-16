@@ -32,6 +32,7 @@ class HomeScreen extends StatelessWidget {
                 StreamBuilder<QuerySnapshot<StudentModel>>(
                   stream: value.getData(),
                   builder: (context, snapshot) {
+                  
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
@@ -79,12 +80,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                leading: CircleAvatar(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 45, 45, 46),
-                                  backgroundImage:
-                                      NetworkImage(data.image ?? ''),
-                                ),
+                              
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -94,11 +90,12 @@ class HomeScreen extends StatelessWidget {
                                         color: Color.fromARGB(255, 0, 0, 0),
                                       ),
                                       onPressed: () {
+                                        value.updateStudent(id, StudentModel(age: '',clas: '' ,name: '',rollno: ''));
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                EditingScreen(),
+                                                EditingScreen(id: id,student: data),
                                           ),
                                         );
                                       },
@@ -119,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  DetailsScreen(),
+                                                  DetailsScreen(student: data),
                                             ));
                                       },
                                       icon: const Icon(Icons.arrow_forward_ios),
@@ -154,7 +151,7 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Text(
           'Add Details',
-          style: GoogleFonts.aBeeZee(color: Color.fromARGB(255, 249, 249, 249,),fontSize: 20),
+          style: GoogleFonts.aBeeZee(color: const Color.fromARGB(255, 249, 249, 249,),fontSize: 20),
         ),
       ),
     );

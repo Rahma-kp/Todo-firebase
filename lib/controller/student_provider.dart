@@ -7,27 +7,33 @@ import 'package:todo/services/service.dart';
 
 
 class StudentProvider extends ChangeNotifier {
+  TextEditingController namecontoller = TextEditingController();
+  TextEditingController clascontoller = TextEditingController();
+  TextEditingController agecontoller = TextEditingController();
+  TextEditingController rollnocontoller = TextEditingController();
+
+
   // ignore: prefer_final_fields
   FirebaseService _firebaseService = FirebaseService();
   String uniquename = DateTime.now().microsecondsSinceEpoch.toString();
   String downloadurl = '';
 
   Stream<QuerySnapshot<StudentModel>> getData() {
-    return _firebaseService.studentRef.snapshots();
+    return _firebaseService.studentref.snapshots();
   }
 
-  void addStudent(StudentModel student) async {
-    await _firebaseService.studentRef.add(student);
+   addStudent(StudentModel student) async {
+    await _firebaseService.studentref.add(student);
     notifyListeners();
   }
 
   void deleteStudent(String id) async {
-    await _firebaseService.studentRef.doc(id).delete();
+    await _firebaseService.studentref.doc(id).delete();
     notifyListeners();
   }
 
-  void updateStudent(String id, StudentModel student) async {
-    await _firebaseService.studentRef.doc(id).update(student.toJson());
+   updateStudent(id, StudentModel student) async {
+    await _firebaseService.studentref.doc(id).update(student.toJson());
     notifyListeners();
   }
 

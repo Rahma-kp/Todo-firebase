@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/controller/image_provider.dart';
 import 'package:todo/controller/student_provider.dart';
 import 'package:todo/model/student_model.dart';
 import 'package:todo/view/home_screen.dart';
@@ -13,7 +11,7 @@ class AddingScreen extends StatelessWidget {
   TextEditingController namecontoller = TextEditingController();
   TextEditingController clascontoller = TextEditingController();
   TextEditingController agecontoller = TextEditingController();
-  TextEditingController rollnocontoller=TextEditingController();
+  TextEditingController rollnocontoller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,41 +25,6 @@ class AddingScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Consumer<ImageProviders>(
-              builder: (context, value, child) {
-                return CircleAvatar(
-                  radius: 70,
-                  backgroundColor: Colors.grey,
-                  backgroundImage: value.selectedImage != null
-                      ? Image.file(value.selectedImage!).image
-                      : null,
-                );
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Consumer<ImageProviders>(
-                  builder: (context, value, child) => ElevatedButton(
-                    onPressed: () {
-                      value.setImage(ImageSource.camera);
-                    },
-                    child: const Icon(Icons.camera),
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Consumer<ImageProviders>(
-                  builder: (context, value, child) => ElevatedButton(
-                    onPressed: () {
-                      value.setImage(ImageSource.gallery);
-                    },
-                    child: const Icon(Icons.add_a_photo_outlined),
-                  ),
-                )
-              ],
-            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
@@ -89,17 +52,17 @@ class AddingScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)))),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.all(10),
               child: TextFormField(
                   controller: rollnocontoller,
                   decoration: InputDecoration(
-                      hintText: "Enter your Roll Number",
+                      hintText: "Enter your Roll-Number",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)))),
             ),
             ElevatedButton(
-                onPressed: () { 
+                onPressed: () {
                   addstudent(context);
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => HomeScreen(),
@@ -111,22 +74,19 @@ class AddingScreen extends StatelessWidget {
       ),
     );
   }
-  void addstudent(BuildContext context) async {
-  final pro = Provider.of<StudentProvider>(context, listen: false);
-  // final provider = Provider.of<ImageProviderr>(context, listen: false);
-  final name = namecontoller.text;
-  final age = agecontoller.text; 
-  final rollno = rollnocontoller.text;
-  final clas = clascontoller.text; 
-  //  await pro.imageAdder(File(provider.selectedImage!.path));
-  final student = StudentModel(
-    rollno: rollno,
-    clas: clas,
-    age: age, // Fixed the typo here
-    name: name,
-    // image: pro.downloadurl,
-  );
-  pro.addStudent(student);
-}
 
+  void addstudent(BuildContext context) async {
+    final pro = Provider.of<StudentProvider>(context, listen: false);
+    final name = namecontoller.text;
+    final age = agecontoller.text;
+    final rollno = rollnocontoller.text;
+    final clas = clascontoller.text;
+    final student = StudentModel(
+      rollno: rollno,
+      clas: clas,
+      age: age,
+      name: name,
+    );
+    pro.addStudent(student);
+  }
 }

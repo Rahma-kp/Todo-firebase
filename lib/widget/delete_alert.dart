@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/controller/student_provider.dart';
 Future<dynamic> alertdelete(BuildContext context) {
   return showDialog(
     context: context,
@@ -13,11 +15,14 @@ Future<dynamic> alertdelete(BuildContext context) {
               Navigator.of(context).pop();
             },
           ),
-          TextButton(
-            onPressed: () async {
-              Navigator.of(context).pop();
-            },
-            child: const Text("Delete"),
+          Consumer<StudentProvider>(builder: (context, value, child) => 
+             TextButton(
+              onPressed: () async {
+                // value.deleteStudent(id);
+                Navigator.of(context).pop();
+              },
+              child: const Text("Delete"),
+            ),
           ),
         ],
       );
